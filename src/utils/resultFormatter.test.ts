@@ -29,6 +29,10 @@ describe('resultFormatter', () => {
     expect(formatResult(12.3456789012345, DIVISION_OPERATOR).isInfinity).toBe(false);
     expect(formatResult(12.5, DIVISION_OPERATOR).value).toBe('12.5');
     expect(formatResult(12.5, DIVISION_OPERATOR).value.length).toBeLessThanOrEqual(12);
+    expect(formatResult(1e-8, DIVISION_OPERATOR)).toEqual({
+      value: '0.00000001',
+      isInfinity: false,
+    });
     expect(formatResult(1234567890.12345, DIVISION_OPERATOR).value).toContain('.');
     expect(formatResult(1234567890.12345, DIVISION_OPERATOR).value.length).toBeLessThanOrEqual(12);
     expect(formatResult(1234567890.12345, '').value).toContain('e');

@@ -112,7 +112,7 @@ yarn test:visual:update
 - `tests/visual/` contains the Playwright visual regression suite and snapshots
 - `eslint.config.js` and `.prettierrc.json` define linting and formatting rules
 
-See [ARQUITECTURE.md](./ARQUITECTURE.md) for a deeper explanation of the design.
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for a deeper explanation of the design.
 
 ## Contributing
 

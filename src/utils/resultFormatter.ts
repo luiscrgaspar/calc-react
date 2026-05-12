@@ -34,6 +34,10 @@ function expandNumberToDecimalString(value: number): string {
   return `${sign}${digits.slice(0, decimalIndex)}.${digits.slice(decimalIndex)}`;
 }
 
+/**
+ * Returns 0 for whole numbers and the integer-part length for decimals.
+ * Used to estimate display width when budgeting decimal places.
+ */
 export function countNumberBeforePoint(value: number): number {
   const absoluteValue = Math.abs(value);
 
@@ -91,9 +95,14 @@ export function formatResult(
   const totalNumberResult = result.toString().length;
 
   if (operator === DIVISION_OPERATOR) {
+    const expandedResult = expandNumberToDecimalString(result);
+    const shouldUseFixedDecimal =
+      result.toString().includes('e') ||
+      Math.max(totalNumberResult, expandedResult.length) > MAX_RESULT_LENGTH;
+
     return {
       value:
-        totalNumberResult > MAX_RESULT_LENGTH
+        shouldUseFixedDecimal
           ? result.toFixed(getMinDecimalPlaces(result))
           : result.toString(),
       isInfinity: false,
