@@ -53,15 +53,21 @@ export function countDecimals(value: number): number {
 }
 
 export function getMinDecimalPlaces(value: number): number {
-  return countDecimals(value) === 0
-    ? 0
-    : Math.max(
-        0,
-        Math.min(
-          MAX_RESULT_LENGTH - countNumberBeforePoint(value),
-          expandNumberToDecimalString(value).length
-        )
-      );
+  const decimals = countDecimals(value);
+
+  if (decimals === 0) {
+    return 0;
+  }
+
+  const maxAllowedDecimals = Math.max(
+    0,
+    Math.min(
+      MAX_RESULT_LENGTH - countNumberBeforePoint(value) - 1 - (value < 0 ? 1 : 0),
+      expandNumberToDecimalString(value).length
+    )
+  );
+
+  return Math.min(decimals, maxAllowedDecimals);
 }
 
 export function formatResult(
