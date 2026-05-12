@@ -27,6 +27,8 @@ The goal is to keep business rules out of the view layer and make future changes
 
 ## File Map
 
+- `src/App.tsx` - top-level application shell
+- `src/main.tsx` - React entry point
 - `src/features/calculator/useCalculator.ts` - state machine, event handlers, and button model
 - `src/utils/calculatorEngine.ts` - calculator math
 - `src/utils/resultFormatter.ts` - output formatting and display helpers

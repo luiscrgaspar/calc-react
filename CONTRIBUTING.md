@@ -10,6 +10,7 @@ yarn install
 
 - `yarn dev` starts the local Vite dev server
 - `yarn build` type-checks and creates a production build
+- `yarn preview` serves the production build locally
 - `yarn lint` checks the repo with ESLint
 - `yarn lint:fix` applies safe ESLint fixes
 - `yarn format` writes the Prettier formatting
