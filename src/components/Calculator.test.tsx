@@ -1,13 +1,10 @@
-import userEvent from '@testing-library/user-event';
+﻿import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Calculator } from './Calculator';
 
-async function clickSequence(
-  user: ReturnType<typeof userEvent.setup>,
-  labels: string[]
-) {
+function clickSequence(labels: string[]) {
   for (const label of labels) {
-    await user.click(screen.getByRole('button', { name: label, exact: true }));
+    fireEvent.click(screen.getByRole('button', { name: label, exact: true }));
   }
 }
 
@@ -26,7 +23,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['2', '+', '3', '=']);
+    await clickSequence( ['2', '+', '3', '=']);
 
     expect(screen.getByRole('status')).toHaveTextContent('5');
   });
@@ -36,7 +33,7 @@ describe('Calculator', () => {
     render(<Calculator />);
 
     await user.click(screen.getByRole('button', { name: 'ES' }));
-    await clickSequence(user, ['1', '÷', '0', '=']);
+    await clickSequence( ['1', '÷', '0', '=']);
 
     expect(screen.getByText('Calculadora')).toBeVisible();
     expect(screen.getByRole('status')).toHaveTextContent('No se puede dividir por cero');
@@ -46,7 +43,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['7', 'MS']);
+    await clickSequence( ['7', 'MS']);
     await user.click(screen.getByRole('button', { name: 'C' }));
 
     expect(screen.getByRole('status')).toHaveTextContent('0');
@@ -62,10 +59,10 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['1', '+', '2', 'CE']);
+    await clickSequence( ['1', '+', '2', 'CE']);
     expect(screen.getByRole('status')).toHaveTextContent('0');
 
-    await clickSequence(user, ['1', '÷', '0', '=']);
+    await clickSequence( ['1', '÷', '0', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('Cannot divide by zero');
 
     await user.click(screen.getByRole('button', { name: 'CE' }));
@@ -76,7 +73,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['1', '2', '3']);
+    await clickSequence( ['1', '2', '3']);
     await user.click(screen.getByRole('button', { name: '⌫' }));
     expect(screen.getByRole('status')).toHaveTextContent('12');
 
@@ -92,7 +89,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['5', '⌫']);
+    await clickSequence( ['5', '⌫']);
 
     expect(screen.getByRole('status')).toHaveTextContent('0');
   });
@@ -101,7 +98,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['5', '±', '⌫']);
+    await clickSequence( ['5', '±', '⌫']);
 
     expect(screen.getByRole('status')).toHaveTextContent('0');
   });
@@ -110,10 +107,10 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['5', '0', '%']);
+    await clickSequence( ['5', '0', '%']);
     expect(screen.getByRole('status')).toHaveTextContent('0');
 
-    await clickSequence(user, ['5', '0', '+', '1', '0', '%', '=']);
+    await clickSequence( ['5', '0', '+', '1', '0', '%', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('50.1');
   });
 
@@ -121,35 +118,35 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['9', 'x²']);
+    await clickSequence( ['9', 'x²']);
     expect(screen.getByRole('status')).toHaveTextContent('81');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['3', 'x³']);
+    await clickSequence( ['3', 'x³']);
     expect(screen.getByRole('status')).toHaveTextContent('27');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['2', '7', '³√x']);
+    await clickSequence( ['2', '7', '³√x']);
     expect(screen.getByRole('status')).toHaveTextContent('3');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['4', '1/x']);
+    await clickSequence( ['4', '1/x']);
     expect(screen.getByRole('status')).toHaveTextContent('0.25');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['0', '1/x']);
+    await clickSequence( ['0', '1/x']);
     expect(screen.getByRole('status')).toHaveTextContent('Cannot divide by zero');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['π']);
+    await clickSequence( ['π']);
     expect(screen.getByRole('status')).toHaveTextContent('3.14159265359');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['e']);
+    await clickSequence( ['e']);
     expect(screen.getByRole('status')).toHaveTextContent('2.71828182846');
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['5', 'n!']);
+    await clickSequence( ['5', 'n!']);
     expect(screen.getByRole('status')).toHaveTextContent('120');
   });
 
@@ -157,19 +154,19 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['9', '±', '²√x']);
+    await clickSequence( ['9', '±', '²√x']);
     expect(screen.getByRole('status')).toHaveTextContent(
       'Invalid number for square root'
     );
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['5', '±', 'n!']);
+    await clickSequence( ['5', '±', 'n!']);
     expect(screen.getByRole('status')).toHaveTextContent(
       'Invalid number for factorial'
     );
 
     await user.click(screen.getByRole('button', { name: 'C' }));
-    await clickSequence(user, ['1', '7', '1', 'n!']);
+    await clickSequence( ['1', '7', '1', 'n!']);
     expect(screen.getByRole('status')).toHaveTextContent(
       'Invalid number for factorial'
     );
@@ -182,22 +179,22 @@ describe('Calculator', () => {
     await user.click(screen.getByRole('button', { name: '=' }));
     expect(screen.getByRole('status')).toHaveTextContent('0');
 
-    await clickSequence(user, ['5', '-', '2', '=']);
+    await clickSequence( ['5', '-', '2', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('3');
 
     await user.click(screen.getByRole('button', { name: '4' }));
     expect(screen.getByRole('status')).toHaveTextContent('4');
 
-    await clickSequence(user, ['+', '6', '=']);
+    await clickSequence( ['+', '6', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('10');
 
-    await clickSequence(user, ['=', '=']);
+    await clickSequence( ['=', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('22');
 
-    await clickSequence(user, ['5', '+', '2', '×']);
+    await clickSequence( ['5', '+', '2', '×']);
     expect(screen.getByRole('status')).toHaveTextContent('7');
 
-    await clickSequence(user, ['4', '=']);
+    await clickSequence( ['4', '=']);
     expect(screen.getByRole('status')).toHaveTextContent('28');
   });
 
@@ -205,7 +202,7 @@ describe('Calculator', () => {
     const user = userEvent.setup();
     render(<Calculator />);
 
-    await clickSequence(user, ['5', '÷', '0', '+']);
+    await clickSequence( ['5', '÷', '0', '+']);
 
     expect(screen.getByRole('status')).toHaveTextContent('Cannot divide by zero');
   });
@@ -239,3 +236,4 @@ describe('Calculator', () => {
     expect(screen.getByRole('status')).toHaveTextContent('-Infinity');
   });
 });
+
