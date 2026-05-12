@@ -2,7 +2,7 @@
 
 ## Overview
 
-This app is intentionally small, but the code is organized into three layers so the UI stays simple and the calculator logic remains testable:
+This app is intentionally small, but the code is organized into three main layers so the UI stays simple and the calculator logic remains testable:
 
 - `src/components/` for presentational React components
 - `src/features/calculator/` for calculator state, event wiring, and UI model assembly
@@ -39,10 +39,10 @@ The goal is to keep business rules out of the view layer and make future changes
 
 - Unit tests cover the pure math and formatting helpers.
 - Component tests cover calculator interactions and language switching.
-- A visual smoke test checks that the calculator shell and row structure stay intact.
+- Visual tests cover the calculator shell and common interaction states.
 
 ## Future Improvements
 
 - Split the calculator hook into smaller domain helpers if the feature set grows.
 - Add keyboard support if the app needs desktop-first accessibility.
-- Add screenshot-based visual regression tests if the UI becomes more complex.
+- Expand the visual test suite if more screens or calculator states are added.

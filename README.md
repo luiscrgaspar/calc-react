@@ -1,14 +1,14 @@
 # Calc React
 
-Calc React is a React 19 + TypeScript calculator built with Vite. It includes memory buttons, scientific operations, localized labels/messages, and a lightweight test suite.
+Calc React is a React 19 + TypeScript calculator built with Vite. It includes memory controls, scientific operations, localized labels and messages, and automated unit, component, and visual tests.
 
 ## Features
 
-- Basic arithmetic and repeated equals behavior
+- Basic arithmetic, repeated equals behavior, and chained operations
 - Scientific helpers such as square, cube, square root, cube root, factorial, reciprocal, percentage, and constants
 - Memory controls for store, recall, and clear
 - Language switching for English, Spanish, and Portuguese
-- Accessible result output with a clean responsive layout
+- Accessible result output with a responsive layout
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ yarn dev
 yarn build
 ```
 
-## Test
+## Testing
 
 ```bash
 yarn test
@@ -69,6 +69,8 @@ If the UI changes intentionally, refresh the snapshots with:
 yarn test:visual:update
 ```
 
+## Code Quality
+
 Check code quality with lint:
 
 ```bash
@@ -84,7 +86,7 @@ yarn format
 ## Project Structure
 
 - `src/components/` contains presentational UI components
-- `src/features/calculator/` contains the calculator hook and state wiring
+- `src/features/calculator/` contains the calculator hook, reducer, and state wiring
 - `src/utils/` contains pure math and formatting helpers
 - `src/i18n.ts` stores localized messages
 - `src/constants.ts` stores shared labels and operator symbols

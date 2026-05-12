@@ -12,8 +12,8 @@ yarn install
 - `yarn build` type-checks and creates a production build
 - `yarn lint` checks the repo with ESLint
 - `yarn lint:fix` applies safe ESLint fixes
-- `yarn format:check` checks formatting with Prettier
 - `yarn format` writes the Prettier formatting
+- `yarn format:check` checks formatting with Prettier
 - `yarn test` runs the Vitest suite once
 - `yarn test:watch` keeps the test runner open while you iterate
 - `yarn test:coverage` reports source coverage for the unit suite
@@ -22,7 +22,7 @@ yarn install
 
 ## Code Style
 
-- Keep view components presentational and push behavior into the calculator hook or utility modules
+- Keep view components presentational and move behavior into the calculator hook or utility modules
 - Prefer pure functions for math and formatting
 - Use stable `id` values for interactive elements when a list is rendered
 - Keep translations and shared labels in the dedicated constants and i18n files
@@ -33,7 +33,7 @@ yarn install
 
 - Add or update unit tests when changing calculator math or formatting
 - Add or update component tests when changing the UI flow or accessibility behavior
-- Keep the visual regression suite aligned with the rendered structure and intentional visual states
+- Keep the visual regression suite aligned with intentional rendered states
 - Prefer snapshot updates only after confirming the change is expected
 
 ## Pull Request Checklist
