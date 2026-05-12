@@ -14,9 +14,10 @@ describe('resultFormatter', () => {
     expect(countNumberBeforePoint(12)).toBe(0);
     expect(countDecimals(12.34)).toBe(2);
     expect(countDecimals(12)).toBe(0);
-    expect(countDecimals(1e-7)).toBe(0);
+    expect(countDecimals(1e-7)).toBe(7);
     expect(getMinDecimalPlaces(12.34)).toBeGreaterThan(0);
     expect(getMinDecimalPlaces(12)).toBe(0);
+    expect(getMinDecimalPlaces(1e-7)).toBeGreaterThan(0);
   });
 
   it('formats standard and division results', () => {

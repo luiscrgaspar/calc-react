@@ -401,7 +401,20 @@ export function useCalculator() {
   }
 
   function operation(operator: Operator) {
+    const hadAlreadyDoneEqualOperation = state.alreadyDoneEqualOperation;
     setAlreadyDoneEqualOperation(false);
+
+    if (hadAlreadyDoneEqualOperation) {
+      setCurrentTemporaryValue(state.currentValue);
+      setCurrentOperator(operator);
+      setGoingToDoOperation(true);
+      return;
+    }
+
+    if (state.goingToDoOperation) {
+      setCurrentOperator(operator);
+      return;
+    }
 
     if (state.currentOperator !== '') {
       const pendingResult = getPendingBinaryOperationResult(false);

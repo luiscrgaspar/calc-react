@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
@@ -26,7 +27,7 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'yarn dev --host 127.0.0.1 --port 4173',
+    command: 'yarn build && yarn preview --host 127.0.0.1 --port 4173',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
   },
@@ -35,7 +36,6 @@ module.exports = defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        channel: 'chrome',
         viewport: {
           width: 360,
           height: 900,

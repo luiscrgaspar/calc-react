@@ -12,6 +12,7 @@ export function LanguageSwitch({ languages, onChangeLanguage }: Props) {
         <button
           key={language.key}
           type="button"
+          aria-pressed={language.active}
           className={[
             'calculator-language',
             language.active ? 'calculator-language-active' : '',

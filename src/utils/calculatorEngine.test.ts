@@ -37,7 +37,8 @@ describe('calculatorEngine', () => {
     expect(calculateCubicRoot(27)).toBe(3);
     expect(calculateFactorial(5)).toBe(120);
     expect(calculateFactorial(0)).toBe(1);
-    expect(calculateFactorial(170)).toBeGreaterThan(0);
+    expect(calculateFactorial(170)).toBe(7.257415615308004e306);
+    expect(calculateFactorial(171)).toBe('invalid_factorial_input');
     expect(calculateFactorial(-1)).toBe('invalid_factorial_input');
     expect(calculateFactorial(1.2)).toBe('invalid_factorial_input');
     expect(calculateReciprocal(4)).toBe(0.25);

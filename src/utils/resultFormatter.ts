@@ -8,6 +8,32 @@ export interface FormattedResult {
   isInfinity: boolean;
 }
 
+function expandNumberToDecimalString(value: number): string {
+  const normalizedValue = value.toString().toLowerCase();
+
+  if (!normalizedValue.includes('e')) {
+    return normalizedValue;
+  }
+
+  const [mantissa, exponentPart] = normalizedValue.split('e');
+  const exponent = Number(exponentPart);
+  const sign = mantissa.startsWith('-') ? '-' : '';
+  const unsignedMantissa = sign ? mantissa.slice(1) : mantissa;
+  const [integerPart, fractionalPart = ''] = unsignedMantissa.split('.');
+  const digits = `${integerPart}${fractionalPart}`;
+  const decimalIndex = integerPart.length + exponent;
+
+  if (decimalIndex <= 0) {
+    return `${sign}0.${'0'.repeat(Math.abs(decimalIndex))}${digits}`;
+  }
+
+  if (decimalIndex >= digits.length) {
+    return `${sign}${digits}${'0'.repeat(decimalIndex - digits.length)}`;
+  }
+
+  return `${sign}${digits.slice(0, decimalIndex)}.${digits.slice(decimalIndex)}`;
+}
+
 export function countNumberBeforePoint(value: number): number {
   const absoluteValue = Math.abs(value);
 
@@ -15,7 +41,7 @@ export function countNumberBeforePoint(value: number): number {
     return 0;
   }
 
-  return absoluteValue.toString().split('.')[0].length;
+  return expandNumberToDecimalString(absoluteValue).split('.')[0].length;
 }
 
 export function countDecimals(value: number): number {
@@ -23,7 +49,7 @@ export function countDecimals(value: number): number {
     return 0;
   }
 
-  return value.toString().split('.')[1]?.length ?? 0;
+  return expandNumberToDecimalString(value).split('.')[1]?.length ?? 0;
 }
 
 export function getMinDecimalPlaces(value: number): number {
@@ -33,7 +59,7 @@ export function getMinDecimalPlaces(value: number): number {
         0,
         Math.min(
           MAX_RESULT_LENGTH - countNumberBeforePoint(value),
-          value.toString().length
+          expandNumberToDecimalString(value).length
         )
       );
 }
